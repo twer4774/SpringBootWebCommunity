@@ -21,11 +21,13 @@ public class BoardService {
      * @param pageable
      * @return 페이징 처리된 게시글 리스트 반환
      */
+    //스프링부트 시큐리티 버전 2.0
     public Page<Board> findBoardList(Pageable pageable) {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize());
 
         return boardRepository.findAll(pageable);
     }
+
 
     public Board findBoardByIdx(Long idx){
         return boardRepository.findById(idx).orElse(new Board());

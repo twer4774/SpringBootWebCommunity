@@ -1,12 +1,12 @@
 package walter.SpringBootCommunityWeb;
 
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class SpringBootCommunityWebApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 

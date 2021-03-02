@@ -1,23 +1,44 @@
 package walter.SpringBootCommunityWeb;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import walter.SpringBootCommunityWeb.domain.Board;
 import walter.SpringBootCommunityWeb.domain.User;
 import walter.SpringBootCommunityWeb.domain.eums.BoardType;
 import walter.SpringBootCommunityWeb.domain.repository.BoardRepository;
 import walter.SpringBootCommunityWeb.domain.repository.UserRepository;
+import walter.SpringBootCommunityWeb.resolver.UserArgumentResolver;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.IntStream;
 
 @SpringBootApplication
-public class SpringBootCommunityWebApplication {
+public class SpringBootCommunityWebApplication implements WebMvcConfigurer {
+
+	@Autowired
+	private UserArgumentResolver userArgumentResolver;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootCommunityWebApplication.class, args);
+	}
+
+	/**
+	 * {@link walter.SpringBootCommunityWeb.resolver.UserArgumentResolver} 등록
+	 * 사용을 위해 {@link WebMvcConfigurer} 인터페이스를 구현해야 함
+	 */
+
+
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers){
+		argumentResolvers.add(userArgumentResolver);
 	}
 
 	/**
